@@ -1,0 +1,6 @@
+{
+  "name": "Hybrid Portfolio - Art, Data & Engineering",
+  "description": "Portfolio bridging Sketch Art, Data Analytics, and 3D CAD Design Engineering with interactive 3-stage case studies and GitHub Pages deployment guide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
