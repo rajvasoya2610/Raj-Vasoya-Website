@@ -170,7 +170,9 @@ jobs:
           fi
 
       - name: Build Application
-        run: npm run build
+        run: |
+          npm run build
+          touch dist/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
