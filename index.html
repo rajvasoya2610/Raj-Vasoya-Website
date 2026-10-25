@@ -13,8 +13,41 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#090A0F] text-slate-100 antialiased selection:bg-purple-600 selection:text-white min-h-screen overflow-x-hidden font-sans">
-    <div id="root"></div>
+  <body class="bg-[#08090E] text-slate-100 antialiased selection:bg-purple-600 selection:text-white min-h-screen overflow-x-hidden font-sans">
+    <div id="root">
+      <!-- Initial Loading / Splash placeholder to prevent white flashes -->
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #08090E; color: #94A3B8; font-family: system-ui, sans-serif; padding: 20px; text-align: center;">
+        <div style="width: 44px; height: 44px; border: 3px solid rgba(168, 85, 247, 0.2); border-top-color: #A855F7; border-radius: 50%; margin-bottom: 16px; animation: spin-loader 0.8s linear infinite;"></div>
+        <div style="font-size: 14px; font-weight: 600; color: #F1F5F9; letter-spacing: 0.05em; text-transform: uppercase;">
+          Loading Portfolio
+        </div>
+        <div style="font-size: 12px; color: #64748B; margin-top: 6px;">
+          Bridging Art, Data Analytics & Engineering Design
+        </div>
+      </div>
+      <style>
+        @keyframes spin-loader {
+          to { transform: rotate(360deg); }
+        }
+      </style>
+    </div>
+
+    <!-- Helpful module load error tracker -->
+    <script>
+      window.addEventListener('error', function(event) {
+        var root = document.getElementById('root');
+        if (root && root.querySelector('.spin-loader, [style*="spin-loader"]')) {
+          root.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#08090E;color:#F1F5F9;padding:24px;font-family:system-ui,sans-serif;">' +
+            '<div style="max-width:540px;background:#0e111d;border:1px solid rgba(239,68,68,0.4);border-radius:20px;padding:32px;box-shadow:0 20px 40px rgba(0,0,0,0.5);">' +
+              '<h2 style="margin:0 0 8px 0;font-size:20px;color:#f87171;">Application Initialization Issue</h2>' +
+              '<p style="margin:0 0 16px 0;font-size:13px;color:#94a3b8;line-height:1.5;">The browser encountered an error while loading the site scripts: <br><code style="color:#fca5a5;font-size:11px;background:#1e1b2e;padding:4px 8px;border-radius:6px;display:inline-block;margin-top:6px;">' + (event.message || 'Script failed to load') + '</code></p>' +
+              '<button onclick="location.reload()" style="background:#7c3aed;color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;">Reload Page</button>' +
+            '</div>' +
+          '</div>';
+        }
+      });
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
