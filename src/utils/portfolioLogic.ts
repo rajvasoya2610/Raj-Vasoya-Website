@@ -130,7 +130,7 @@ export function generateGitHubWorkflowYaml(repoName: string = ''): string {
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "master"]
   workflow_dispatch:
 
 permissions:
@@ -187,6 +187,7 @@ jobs:
           npm run build -- --base="$FINAL_BASE"
           touch dist/.nojekyll
           cp dist/index.html dist/404.html
+          cp -r dist/assets/* dist/ 2>/dev/null || true
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
