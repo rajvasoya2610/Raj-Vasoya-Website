@@ -169,15 +169,24 @@ jobs:
             npm install --legacy-peer-deps
           fi
 
-      - name: Build Application
-        run: |
-          npm run build
-          touch dist/.nojekyll
-
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
+
+      - name: Build Application
+        run: |
+          BASE_PATH="\${{ steps.pages.outputs.base_path }}"
+          if [ -z "$BASE_PATH" ] || [ "$BASE_PATH" = "/" ]; then
+            FINAL_BASE="/"
+          else
+            FINAL_BASE="\${BASE_PATH%/}/"
+          fi
+          echo "Building with base: $FINAL_BASE"
+          npm run build -- --base="$FINAL_BASE"
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
